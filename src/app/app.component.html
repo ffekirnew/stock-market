@@ -1,0 +1,12 @@
+<div class="text-center flex flex-col justify-center items-center">
+  <h1 class="text-3xl font-bold p-5 text-white">
+    Welcome to {{ title }}!
+  </h1>
+  <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
+  <button (click)="changeStock()"
+    class="button rounded-md bg-gray-300 hover:bg-gray-400 text-gray-900 shadow-sm p-2 m-2 hover:shadow-md">Change
+    stock</button>
+  <button (click)="changeStockPrice()"
+    class="button rounded-md bg-gray-300 hover:bg-gray-400 text-gray-900 shadow-sm p-2 m-2 hover:shadow-md">Change
+    stock's price</button>
+</div>
