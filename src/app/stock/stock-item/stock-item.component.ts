@@ -5,25 +5,29 @@ import { Stock } from 'src/app/model/stock';
   selector: 'app-stock-item',
   templateUrl: './stock-item.component.html',
   styleUrls: ['./stock-item.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class StockItemComponent implements  OnInit, OnDestroy,
                                             AfterContentChecked, AfterContentInit,
                                             AfterViewChecked, AfterViewInit,
                                             DoCheck, OnChanges {
-  @Input()
-  public stock: any;
-
-  @Output()
-  private toggleFavorite: any;
+  @Input() public stock: any;
+  @Output() private toggleFavorite: any;
+  @Output() private addPrice: any;
 
   constructor() {
     this.toggleFavorite = new EventEmitter<Stock>();
+    this.addPrice = new EventEmitter<Stock>();
   }
 
   onToggleFavorite(event: any) {
     console.log(event);
     this.toggleFavorite.emit(this.stock);
+  }
+
+  onAddPrice(event: any) {
+    console.log(event);
+    this.addPrice.emit(this.stock);
   }
 
   changeStockPrice() {

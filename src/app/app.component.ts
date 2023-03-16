@@ -4,32 +4,30 @@ import { Stock } from './model/stock';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements  OnInit, OnDestroy,
                                       AfterContentChecked, AfterContentInit,
                                       AfterViewChecked, AfterViewInit,
                                       DoCheck, OnChanges {
   title = 'stock-market';
-  public stock: any;
+  public stocks: Stock[] = [];
   private counter: number = 1;
   
   onToggleFavorite(stock: Stock): void {
-    console.log(stock);
     stock.favorite = !stock.favorite;
   }
 
-  changeStock() {
-    this.stock = new Stock("Test Stock Company - " + this.counter++ , "TSC", 85, 80)
+  changeStockPrice(index: number) {
+    this.stocks[index].price += 10;
   }
 
-  changeStockPrice() {
-    this.stock.price += 10;
+  onCreateStock(stock: Stock) {
+    this.stocks.push(stock);
   }
 
   ngOnInit(): void {
     console.log("App Component - On Init");
-    this.stock = new Stock("Test Stock Company", "TSC", 85, 80);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
