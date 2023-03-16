@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { Stock } from "src/app/model/stock";
 import { ReactiveFormsModule } from "@angular/forms";
+import { StockService } from "src/app/services/stock.service";
 
 @Component({
   selector: "app-create-stock",
@@ -16,13 +17,15 @@ import { ReactiveFormsModule } from "@angular/forms";
 })
 export class CreateStockComponent {
   public stock: any;
-  @Output() public createStock: EventEmitter<Stock>;
   public confirmed: Boolean = false;
   public exchanges = ["NYSE", "NASDAQ", "OTHER"];
   public stockForm: FormGroup;
+  public message: any;
 
-  constructor(private fb: FormBuilder) {
-    this.createStock = new EventEmitter<Stock>();
+  constructor(
+    private fb: FormBuilder,
+    private stockService: StockService,
+    ) {
     this.stockForm = this.fb.group({
       name: [null, Validators.required],
       code: [null, Validators.required],
@@ -32,19 +35,26 @@ export class CreateStockComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(): boolean {
     if (this.stockForm.valid) {
-      this.stock = {
-        name: this.stockForm.value.name,
-        code: this.stockForm.value.code,
-        price: this.stockForm.value.price,
-        previousPrice: this.stockForm.value.price,
-        exchange: this.stockForm.value.exchangePlace,
-        notablePeople: this.fb.array([]),
-      };
+      this.stock = new Stock('', '', 0, 0, '');
+      this.stock.name = this.stockForm.value.name;
+      this.stock.code = this.stockForm.value.code;
+      this.stock.price = this.stockForm.value.price;
+      this.stock.previousPrice = this.stockForm.value.price;
+      this.stock.exchange = this.stockForm.value.exchangePlace;
+
       console.log(this.stock);
-      this.createStock.emit(this.stock);
+      const newStockCreated = this.stockService.createStock(this.stock);
+      console.log(this.stockService.getStocks())
+      if ( newStockCreated ) {
+        return true;
+      } else {
+        this.message = "Stock Already Exists";
+      }
     }
+
+    return false;
   }
 
   get notablePeople(): FormArray {

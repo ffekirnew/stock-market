@@ -99,5 +99,7 @@
                 rounded-md shadow-md hover:shadow-gray-400"
                 [disabled]="!confirmed" type="submit">Create</button>
         </form>
+        <div *ngIf="message">{{ message }}</div>
+        <div>{{ stockForm.value | json }}</div>
     </div>
 </div>

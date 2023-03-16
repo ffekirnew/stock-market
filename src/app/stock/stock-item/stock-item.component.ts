@@ -12,22 +12,12 @@ export class StockItemComponent implements  OnInit, OnDestroy,
                                             AfterViewChecked, AfterViewInit,
                                             DoCheck, OnChanges {
   @Input() public stock: any;
-  @Output() private toggleFavorite: any;
-  @Output() private addPrice: any;
 
   constructor() {
-    this.toggleFavorite = new EventEmitter<Stock>();
-    this.addPrice = new EventEmitter<Stock>();
   }
 
-  onToggleFavorite(event: any) {
-    console.log(event);
-    this.toggleFavorite.emit(this.stock);
-  }
-
-  onAddPrice(event: any) {
-    console.log(event);
-    this.addPrice.emit(this.stock);
+  toggleFavorite() {
+    this.stock.favorite = !this.stock.favorite;
   }
 
   changeStockPrice() {

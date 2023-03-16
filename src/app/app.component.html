@@ -2,15 +2,6 @@
   <h1 class="text-3xl font-bold p-5 text-white">
     Welcome to {{ title }}!
   </h1>
-  <div *ngIf="stocks">
-    <app-stock-item *ngFor="let stock of stocks; let i = index" [stock]="stock" (toggleFavorite)="onToggleFavorite($event)">
-      <div class="flex flex-row justify-center">
-        <button
-        *ngIf="!stock.favorite"
-        class="button rounded-md bg-gray-800 hover:bg-gray-900 text-white shadow-sm p-2 m-2 hover:shadow-md" [disabled] = "stock.favorite">Add To Favorites!</button>
-        <button (click)="changeStockPrice(i)" class="button rounded-md bg-green-800 hover:bg-green-900 text-white shadow-sm p-2 m-2 hover:shadow-md">Change Price</button>
-    </div>
-    </app-stock-item>
-  </div>
-  <app-create-stock (createStock)="onCreateStock($event)"></app-create-stock>
+  <app-stock-list></app-stock-list>
+  <app-create-stock></app-create-stock>
 </div>

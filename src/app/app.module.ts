@@ -7,12 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StockItemComponent } from './stock/stock-item/stock-item.component';
 import { CreateStockComponent } from './stock/create-stock/create-stock.component';
+import { StockListComponent } from './stock/stock-list/stock-list.component';
+import { StockService } from './services/stock.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     StockItemComponent,
-    CreateStockComponent
+    CreateStockComponent,
+    StockListComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,7 @@ import { CreateStockComponent } from './stock/create-stock/create-stock.componen
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [StockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,4 @@
+<div *ngIf="stocks" class="grid grid-cols-3 gap-2">
+    <app-stock-item *ngFor="let stock of stocks; let i= index" [stock]="stock">
+    </app-stock-item>
+</div>
